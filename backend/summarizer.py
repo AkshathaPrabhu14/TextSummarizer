@@ -5,13 +5,6 @@ from dotenv import load_dotenv
 # Ensure environment variables are loaded
 load_dotenv()
 
-# Retrieve API key
-api_key = os.getenv("GROQ_API_KEY")
-
-# Initialize the Groq client
-# If api_key is None, Groq will automatically attempt to read it from GROQ_API_KEY env var
-client = Groq(api_key=api_key)
-
 def summarize_text(text: str) -> str:
     """
     Sends the provided text to the Groq API and returns a concise summary.
@@ -29,10 +22,14 @@ def summarize_text(text: str) -> str:
     if not text or not text.strip():
         raise ValueError("Input text cannot be empty.")
         
+    api_key = os.getenv("GROQ_API_KEY")
     if not api_key or "placeholder" in api_key:
         raise ValueError("Groq API key is missing or not configured in backend/.env")
         
     try:
+        # Initialize the Groq client lazily
+        client = Groq(api_key=api_key)
+        
         # Create completion request to the Groq API
         chat_completion = client.chat.completions.create(
             messages=[
