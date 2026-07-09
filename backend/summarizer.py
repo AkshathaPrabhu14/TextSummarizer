@@ -3,7 +3,8 @@ from groq import Groq
 from dotenv import load_dotenv
 
 # Ensure environment variables are loaded
-load_dotenv()
+dotenv_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '.env')
+load_dotenv(dotenv_path)
 
 def summarize_text(text: str) -> str:
     """
@@ -24,7 +25,7 @@ def summarize_text(text: str) -> str:
         
     api_key = os.getenv("GROQ_API_KEY")
     if not api_key or "placeholder" in api_key:
-        raise ValueError("Groq API key is missing or not configured in backend/.env")
+        raise ValueError("Groq API key is missing. Please configure GROQ_API_KEY in your local backend/.env file or in your hosting provider's dashboard (e.g., Render environment variables).")
         
     try:
         # Initialize the Groq client lazily
