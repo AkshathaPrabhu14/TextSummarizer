@@ -1,0 +1,30 @@
+# Version control ignores
+
+# Python/Backend
+backend/venv/
+backend/.env
+backend/__pycache__/
+backend/*.pyc
+backend/logs/
+backend/*.log
+
+# Node/Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/.env
+frontend/*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# IDE / Editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
